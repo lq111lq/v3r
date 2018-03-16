@@ -41,17 +41,11 @@ export default {
 
     this.$el.append(this.$_v3r_renderer.domElement)
 
-    var scene = new THREE.Scene()
     var camera = new THREE.PerspectiveCamera(75, this.innerWidth / this.innerHeight, 0.1, 1000)
-
-    var geometry = new THREE.BoxGeometry(1, 1, 1)
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    var cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
 
     camera.position.z = 5
 
-    self.$_v3r_scene = scene
+    // self.$_v3r_scene = scene
     self.$_v3r_camera = camera
 
     function render () {

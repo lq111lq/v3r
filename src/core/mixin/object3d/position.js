@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   props: {
     positionX: {
       type: [Number, String],
@@ -31,11 +31,8 @@ module.exports = {
     }
   },
   beforeMount: function () {
-    var self = this
-    this.$on('object3DCreated', function () {
-      self.$_v3r_object3D.position.x = Number(this.positionX)
-      self.$_v3r_object3D.position.y = Number(this.positionY)
-      self.$_v3r_object3D.position.z = Number(this.positionZ)
-    })
+    this.$_v3r_object3D.position.x = Number(this.positionX)
+    this.$_v3r_object3D.position.y = Number(this.positionY)
+    this.$_v3r_object3D.position.z = Number(this.positionZ)
   }
 }

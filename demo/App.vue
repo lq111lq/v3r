@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <webgl-renderer style="width:600px;height:300px;"></webgl-renderer>
-    <!-- <router-view/> -->
+    <ol>
+      <li><a href="#/position">position scale rotation</a></li>
+    </ol>
+    <router-view class="router-view"></router-view>
   </div>
 </template>
 
@@ -13,11 +15,16 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+}
+
+ol {
+  float: left;
+  width: 250px;
+}
+
+.router-view {
+  float: left;
+  width: 600px;
 }
 </style>
