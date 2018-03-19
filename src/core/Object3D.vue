@@ -43,6 +43,22 @@ export default {
   },
   created () {
     this.$_v3r_handelCreated()
+    this.$on('sync', () => {
+      if (!this.$_v3r_object3D) {
+        return
+      }
+      this.$emit('update:positionX', this.$_v3r_object3D.position.x)
+      this.$emit('update:positionY', this.$_v3r_object3D.position.y)
+      this.$emit('update:positionZ', this.$_v3r_object3D.position.z)
+
+      this.$emit('update:rotationX', this.$_v3r_object3D.rotation.x)
+      this.$emit('update:rotationY', this.$_v3r_object3D.rotation.y)
+      this.$emit('update:rotationZ', this.$_v3r_object3D.rotation.z)
+
+      this.$emit('update:scaleX', this.$_v3r_object3D.scale.x)
+      this.$emit('update:scaleY', this.$_v3r_object3D.scale.y)
+      this.$emit('update:scaleZ', this.$_v3r_object3D.scale.z)
+    })
   },
   beforeDestroy () {
     this.$_v3r_handelBeforeDestroy()

@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     resize (event) {
+      this.$emit('resize', event)
       this.width = event.width
       this.height = event.height
 
@@ -41,12 +42,12 @@ export default {
 
     this.$el.append(this.$_v3r_renderer.domElement)
 
-    var camera = new THREE.PerspectiveCamera(75, this.innerWidth / this.innerHeight, 0.1, 1000)
+    // var camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000)
 
-    camera.position.z = 5
+    // camera.position.z = 5
 
     // self.$_v3r_scene = scene
-    self.$_v3r_camera = camera
+    // self.$_v3r_camera = camera
 
     function render () {
       self.$_v3r_rafIndex = requestAnimationFrame(render)

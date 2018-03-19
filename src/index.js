@@ -4,6 +4,9 @@ import Scene from 'src/scene/Scene.vue'
 
 import Mesh from 'src/object/Mesh.vue'
 
+import Camera from 'src/camera/Camera.vue'
+import PerspectiveCamera from 'src/camera/PerspectiveCamera.vue'
+
 import Geometry from 'src/geometry/Geometry.vue'
 import BoxGeometry from 'src/geometry/BoxGeometry.vue'
 
@@ -17,6 +20,9 @@ export default {
     Vue.component('WebglRenderer', WebGLRenderer)
 
     Vue.component('Scene', Scene)
+
+    Vue.component('Camera', Camera)
+    Vue.component('PerspectiveCamera', PerspectiveCamera)
 
     Vue.component('Mesh', Mesh)
     Vue.component('ArrowHelper', ArrowHelper)

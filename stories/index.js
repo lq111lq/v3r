@@ -6,6 +6,7 @@ import {
   color,
   number
 } from '@storybook/addon-knobs/vue'
+import OrbitControls from './controls/OrbitControls.js'
 
 storiesOf('Base', module)
   .addDecorator(withKnobs)
@@ -67,6 +68,7 @@ storiesOf('Base', module)
               <mesh-basic-material :color="color" :opacity="opacity" :transparent="transparent" :wireframe="wireframe"/>
             </mesh>
           </scene>
+          <perspective-camera :positionZ="10"/>
         </webgl-renderer>
         <dat-gui style="position: absolute;right: 0px;top: 0px">
           <dat-folder name="position">
@@ -133,7 +135,7 @@ storiesOf('Base', module)
     return {
       template: `
       <preview-container>
-        <webgl-renderer style="width:100%;height:100%;">
+        <webgl-renderer ref="renderer" style="width:100%;height:100%;">
           <scene ref="scene">
             <mesh 
               :positionX="positionX" 
@@ -151,6 +153,7 @@ storiesOf('Base', module)
               <box-geometry></box-geometry>
             </mesh>
           </scene>
+          <perspective-camera ref="camera" :positionZ="10"/>
         </webgl-renderer>
         <dat-gui style="position: absolute;right: 0px;top: 0px">
           <dat-folder name="position">
@@ -197,6 +200,7 @@ storiesOf('Base', module)
               <mesh-basic-material :color="color" :opacity="opacity" :transparent="transparent" :wireframe="wireframe"/>
             </mesh>
           </scene>
+          <perspective-camera :positionZ="10"/>
         </webgl-renderer>
         <dat-gui style="position: absolute;right: 0px;top: 0px">
           <dat-folder name="Material">
@@ -213,6 +217,72 @@ storiesOf('Base', module)
       `,
       data () {
         return data
+      }
+    }
+  })
+  .add('camera & controller', () => {
+    var data = {
+      positionX: number('positionX', 0),
+      positionY: number('positionY', 0),
+      positionZ: number('positionZ', 10),
+
+      rotationX: number('rotationX', 0),
+      rotationY: number('rotationY', 0),
+      rotationZ: number('rotationZ', 0)
+    }
+
+    return {
+      template: `
+      <preview-container>
+        <webgl-renderer ref="renderer" style="width:100%;height:100%;">
+          <scene ref="scene">
+            <mesh>
+              <box-geometry/>
+              <mesh-basic-material :color="0x00ffff"/>
+            </mesh>
+          </scene>
+          <perspective-camera ref="camera"
+          :positionX.sync="positionX" 
+          :positionY.sync="positionY" 
+          :positionZ.sync="positionZ"
+
+          :rotationX="Math.PI * rotationX / 180" @update:rotationX="val => rotationX = 180 * val/Math.PI"
+          :rotationY="Math.PI * rotationY / 180" @update:rotationY="val => rotationY = 180 * val/Math.PI"
+          :rotationZ="Math.PI * rotationZ / 180" @update:rotationZ="val => rotationZ = 180 * val/Math.PI"
+          />
+        </webgl-renderer>
+        <dat-gui style="position: absolute;right: 0px;top: 0px">
+
+          <dat-number-controller label="positionX" v-model="positionX" :max="10" :min="-10"/>
+          <dat-number-controller label="positionY" v-model="positionY" :max="10" :min="-10"/>
+          <dat-number-controller label="positionZ" v-model="positionZ" :max="10" :min="-10"/>
+
+          <dat-number-controller label="rotationX" v-model="rotationX" :max="180" :min="-180"/>
+          <dat-number-controller label="rotationY" v-model="rotationY" :max="180" :min="-180"/>
+          <dat-number-controller label="rotationZ" v-model="rotationZ" :max="180" :min="-180"/>
+
+        </dat-gui>
+        <div style="clear: both;"></div>
+      </preview-container>
+      `,
+      data () {
+        return data
+      },
+      mounted () {
+        var el = this.$refs.renderer.$el
+        var cameraVm = this.$refs.camera
+        var camera = cameraVm.$_v3r_object3D
+
+        var controls = new OrbitControls(camera, el)
+        controls.maxPolarAngle = Math.PI * 0.5
+        controls.minDistance = 0
+        controls.maxDistance = 7500
+        controls.reset()
+        cameraVm.$emit('sync')
+
+        controls.addEventListener('change', function (event) {
+          cameraVm.$emit('sync')
+        })
       }
     }
   })
