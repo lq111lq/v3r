@@ -29,20 +29,20 @@ export default {
   },
   watch: {
     fov (fov) {
-      this.$_v3r_camera.fov = fov
-      this.$_v3r_camera.updateProjectionMatrix()
+      this.$_v3r_object3D.fov = fov
+      this.$_v3r_object3D.updateProjectionMatrix()
     },
     aspect (aspect) {
-      this.$_v3r_camera.aspect = aspect
-      this.$_v3r_camera.updateProjectionMatrix()
+      this.$_v3r_object3D.aspect = aspect
+      this.$_v3r_object3D.updateProjectionMatrix()
     },
     near (near) {
-      this.$_v3r_camera.near = near
-      this.$_v3r_camera.updateProjectionMatrix()
+      this.$_v3r_object3D.near = near
+      this.$_v3r_object3D.updateProjectionMatrix()
     },
     far (far) {
-      this.$_v3r_camera.far = far
-      this.$_v3r_camera.updateProjectionMatrix()
+      this.$_v3r_object3D.far = far
+      this.$_v3r_object3D.updateProjectionMatrix()
     }
   },
   methods: {

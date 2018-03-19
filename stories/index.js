@@ -222,6 +222,9 @@ storiesOf('Base', module)
   })
   .add('camera & controller', () => {
     var data = {
+      aspect: 1,
+      fov: number('fov', 50),
+
       positionX: number('positionX', 0),
       positionY: number('positionY', 0),
       positionZ: number('positionZ', 10),
@@ -234,7 +237,7 @@ storiesOf('Base', module)
     return {
       template: `
       <preview-container>
-        <webgl-renderer ref="renderer" style="width:100%;height:100%;">
+        <webgl-renderer ref="renderer" style="width:100%;height:100%;" @resize="resize">
           <scene ref="scene">
             <mesh>
               <box-geometry/>
@@ -242,6 +245,10 @@ storiesOf('Base', module)
             </mesh>
           </scene>
           <perspective-camera ref="camera"
+          
+          :fov="fov"
+          :aspect="aspect"
+          
           :positionX.sync="positionX" 
           :positionY.sync="positionY" 
           :positionZ.sync="positionZ"
@@ -252,6 +259,7 @@ storiesOf('Base', module)
           />
         </webgl-renderer>
         <dat-gui style="position: absolute;right: 0px;top: 0px">
+          <dat-number-controller label="fov" v-model="fov" :min="15" :max="180"/>
 
           <dat-number-controller label="positionX" v-model="positionX" :max="10" :min="-10"/>
           <dat-number-controller label="positionY" v-model="positionY" :max="10" :min="-10"/>
@@ -267,6 +275,11 @@ storiesOf('Base', module)
       `,
       data () {
         return data
+      },
+      methods: {
+        resize (event) {
+          this.aspect = event.width / event.height
+        }
       },
       mounted () {
         var el = this.$refs.renderer.$el
