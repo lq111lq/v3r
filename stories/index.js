@@ -26,8 +26,8 @@ storiesOf('MyButton', module)
 
     return {
       template: `
-      <div style="background: black;">
-        <webgl-renderer style="width:600px;height:300px;float:left;">
+      <div style="background: black;position: relative;">
+        <webgl-renderer style="width:100%;height:600px;">
           <scene ref="scene">
             <mesh 
               :positionX="positionX" 
@@ -46,18 +46,24 @@ storiesOf('MyButton', module)
             </mesh>
           </scene>
         </webgl-renderer>
-        <dat-gui style="float:right;">
-          <dat-number-controller label="positionX" v-model="positionX" :max="10" :min="-10"/>
-          <dat-number-controller label="positionY" v-model="positionY" :max="10" :min="-10"/>
-          <dat-number-controller label="positionZ" v-model="positionZ" :max="10" :min="-10"/>
+        <dat-gui style="position: absolute;right: 0px;top: 0px">
+          <dat-folder name="position">
+            <dat-number-controller label="positionX" v-model="positionX" :max="10" :min="-10"/>
+            <dat-number-controller label="positionY" v-model="positionY" :max="10" :min="-10"/>
+            <dat-number-controller label="positionZ" v-model="positionZ" :max="10" :min="-10"/>
+          </dat-folder>
 
-          <dat-number-controller label="rotationX" v-model="rotationX" :max="180" :min="-180"/>
-          <dat-number-controller label="rotationY" v-model="rotationY" :max="180" :min="-180"/>
-          <dat-number-controller label="rotationZ" v-model="rotationZ" :max="180" :min="-180"/>
+          <dat-folder name="rotation">
+            <dat-number-controller label="rotationX" v-model="rotationX" :max="180" :min="-180"/>
+            <dat-number-controller label="rotationY" v-model="rotationY" :max="180" :min="-180"/>
+            <dat-number-controller label="rotationZ" v-model="rotationZ" :max="180" :min="-180"/>
+          </dat-folder>
 
-          <dat-number-controller label="scaleX" v-model="scaleX" :max="10" :min="0"/>
-          <dat-number-controller label="scaleY" v-model="scaleY" :max="10" :min="0"/>
-          <dat-number-controller label="scaleZ" v-model="scaleZ" :max="10" :min="0"/>
+          <dat-folder name="scale">
+            <dat-number-controller label="scaleX" v-model="scaleX" :max="10" :min="0"/>
+            <dat-number-controller label="scaleY" v-model="scaleY" :max="10" :min="0"/>
+            <dat-number-controller label="scaleZ" v-model="scaleZ" :max="10" :min="0"/>
+          </dat-folder>
         </dat-gui>
         <div style="clear: both;"></div>
       </div>
