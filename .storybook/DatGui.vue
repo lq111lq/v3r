@@ -1,5 +1,5 @@
 <template>
-  <div ref='container'><slot></slot></div>
+  <div class="container" ref='container'><slot></slot></div>
 </template>
 <script>
 import datgui from 'dat.gui'
@@ -15,4 +15,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .container {
+    height: 100%;
+    overflow-y: auto;
+  }
+</style>
 

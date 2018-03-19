@@ -9,17 +9,14 @@ export default {
   name: 'Geometry',
   methods: {
     createGeometry () {
-      var geometry = new THREE.BoxGeometry(1, 1, 1)
+      var geometry = new THREE.Geometry()
       return geometry
     },
     generateGeometry () {
-      this.$_v3r_Geometry_old = this.$_v3r_Geometry
-
-      this.$_v3r_Geometry = this.createGeometry()
-      this.$parent.$_v3r_object3D.geometry = this.$_v3r_Geometry
-
-      this.$_v3r_Geometry_old && this.$_v3r_Geometry_old.dispose()
-      delete this.$_v3r_Geometry_old
+      this.$_v3r_oldGeometry = this.$_v3r_geometry
+      this.$_v3r_geometry = this.createGeometry()
+      this.$parent.$_v3r_object3D.geometry = this.$_v3r_geometry
+      this.$_v3r_oldGeometry && this.$_v3r_oldGeometry.dispose()
     }
   },
   created () {

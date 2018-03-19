@@ -7,6 +7,9 @@ import Mesh from 'src/object/Mesh.vue'
 import Geometry from 'src/geometry/Geometry.vue'
 import BoxGeometry from 'src/geometry/BoxGeometry.vue'
 
+import Material from 'src/material/Material.vue'
+import MeshBasicMaterial from 'src/material/MeshBasicMaterial.vue'
+
 import ArrowHelper from 'src/helper/ArrowHelper.vue'
 
 export default {
@@ -20,5 +23,8 @@ export default {
 
     Vue.component('Geometry', Geometry)
     Vue.component('BoxGeometry', BoxGeometry)
+
+    Vue.component('Material', Material)
+    Vue.component('MeshBasicMaterial', MeshBasicMaterial)
   }
 }

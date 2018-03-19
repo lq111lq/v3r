@@ -45,8 +45,8 @@ export default {
 <style scoped>
   .new_tab {
 		position: fixed;
-		bottom: 20px;
-		right: 20px;
+		top: 20px;
+		left: 20px;
 		padding: 8px;
 		color: #fff;
 		background-color: #555;
