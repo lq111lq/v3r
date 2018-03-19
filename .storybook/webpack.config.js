@@ -14,7 +14,7 @@ module.exports = (storybookBaseConfig, configType) => {
     include: [path.resolve(__dirname, '../stories')],
     enforce: 'pre',
   });
-
+  storybookBaseConfig.devtool = 'cheap-module-eval-source-map'
   storybookBaseConfig.resolve.alias.src = resolve('src')
 
   storybookBaseConfig.plugins.push(

@@ -26,8 +26,8 @@ storiesOf('MyButton', module)
 
     return {
       template: `
-      <div style="background: black;position: relative;">
-        <webgl-renderer style="width:100%;height:600px;">
+      <preview-container>
+        <webgl-renderer style="width:100%;height:100%;">
           <scene ref="scene">
             <mesh 
               :positionX="positionX" 
@@ -66,7 +66,7 @@ storiesOf('MyButton', module)
           </dat-folder>
         </dat-gui>
         <div style="clear: both;"></div>
-      </div>
+      </preview-container>
       `,
       data () {
         return data
