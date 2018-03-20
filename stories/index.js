@@ -299,3 +299,68 @@ storiesOf('Base', module)
       }
     }
   })
+  .add('asset', () => {
+    var data = {
+      transparent: boolean('transparent', false),
+      opacity: number('opacity', 1),
+      color: color('color', '#ff00ff'),
+      wireframe: boolean('wireframe', false),
+
+      width: number('width', 1),
+      height: number('height', 1),
+      depth: number('depth', 1),
+      widthSegments: number('widthSegments', 1),
+      heightSegments: number('heightSegments', 1),
+      depthSegments: number('depthSegments', 1)
+    }
+
+    return {
+      template: `
+      <preview-container>
+        <box-geometry 
+          assetName="boxGeometry"
+
+          :width="width"
+          :height="height"
+          :depth="depth"
+          :widthSegments="widthSegments"
+          :heightSegments="heightSegments"
+          :depthSegments="depthSegments"
+        ></box-geometry>
+        <webgl-renderer style="width:100%;height:100%;">
+          <scene ref="scene">
+            <mesh :positionX="-2" geometry="boxGeometry">
+              <mesh-basic-material :color="color" :opacity="opacity" :transparent="transparent" :wireframe="wireframe"/>
+            </mesh>
+            <mesh :positionX="2" geometry="boxGeometry">
+              <mesh-basic-material :color="color" :opacity="opacity" :transparent="transparent" :wireframe="wireframe"/>
+            </mesh>
+          </scene>
+          <perspective-camera :positionZ="10"/>
+        </webgl-renderer>
+        <dat-gui style="position: absolute;right: 0px;top: 0px">
+          <dat-folder name="Material">
+            <dat-text-controller label="transparent" v-model="transparent"/>
+            <dat-number-controller label="opacity" v-model="opacity" :min="0" :max="1"/>
+            <dat-text-controller label="wireframe" v-model="wireframe"/>
+          </dat-folder>
+          <dat-folder name="MeshBasicMaterial">
+            <dat-color-controller label="color" v-model="color"/>
+          </dat-folder>
+          <dat-folder name="Geometry">
+            <dat-number-controller label="width" v-model="width" :min="0" :max="10"/>
+            <dat-number-controller label="height" v-model="height" :min="0" :max="10"/>
+            <dat-number-controller label="depth" v-model="depth" :min="0" :max="10"/>
+            <dat-number-controller label="widthSegments" v-model="widthSegments" :min="0" :max="10"/>
+            <dat-number-controller label="heightSegments" v-model="heightSegments" :min="0" :max="10"/>
+            <dat-number-controller label="depthSegments" v-model="depthSegments" :min="0" :max="10"/>
+          </dat-folder>
+        </dat-gui>
+        <div style="clear: both;"></div>
+      </preview-container>
+      `,
+      data () {
+        return data
+      }
+    }
+  })

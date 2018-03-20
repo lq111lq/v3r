@@ -15,6 +15,8 @@ import MeshBasicMaterial from 'src/material/MeshBasicMaterial.vue'
 
 import ArrowHelper from 'src/helper/ArrowHelper.vue'
 
+import asset from 'src/core/asset.js'
+
 export default {
   install (Vue, options) {
     Vue.component('WebglRenderer', WebGLRenderer)
@@ -32,5 +34,7 @@ export default {
 
     Vue.component('Material', Material)
     Vue.component('MeshBasicMaterial', MeshBasicMaterial)
+
+    Vue.prototype.$_v3r_asset = asset
   }
 }
